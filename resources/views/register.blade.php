@@ -34,7 +34,7 @@
         <div>
           <label for="first_name" class="block text-sm font-medium leading-6 text-gray-900">First Name</label>
           <div class="mt-2">
-            <input id="first_name" name="first_name" type="text" autocomplete="name" placeholder="Alp" required class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
+            <input id="first_name" value="{{old('first_name')}}" name="first_name" type="text" autocomplete="name" placeholder="Alp" required class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
             @error('first_name')
             <span class="text-red-600 text-sm font-medium">{{ $message }}</span>
             @enderror
@@ -45,7 +45,7 @@
         <div>
           <label for="last_name" class="block text-sm font-medium leading-6 text-gray-900">Last Name</label>
           <div class="mt-2">
-            <input id="last_name" name="last_name" type="text" autocomplete="name" placeholder="Arslan" required class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
+            <input id="last_name" value="{{old('last_name')}}" name="last_name" type="text" autocomplete="name" placeholder="Arslan" required class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
             @error('last_name')
             <span class="text-red-600 text-sm font-medium">{{ $message }}</span>
             @enderror
@@ -56,7 +56,7 @@
         <div>
           <label for="user_name" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
           <div class="mt-2">
-            <input id="user_name" name="user_name" type="text" autocomplete="username" placeholder="alparslan1029" required class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
+            <input id="user_name" value="{{old('user_name')}}" name="user_name" type="text" autocomplete="username" placeholder="alparslan1029" required class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
             @error('user_name')
             <span class="text-red-600 text-sm font-medium">{{ $message }}</span>
             @enderror
@@ -67,7 +67,7 @@
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
           <div class="mt-2">
-            <input id="email" name="email" type="email" autocomplete="email" placeholder="alp.arslan@mail.com" required class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
+            <input id="email" name="email" value="{{old('email')}}" type="email" autocomplete="email" placeholder="alp.arslan@mail.com" required class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
             @error('email')
             <span class="text-red-600 text-sm font-medium">{{ $message }}</span>
             @enderror
@@ -104,7 +104,7 @@
 
       <p class="mt-10 text-center text-sm text-gray-500">
         Already a member?
-        <a href="{{route('login.index')}}" class="font-semibold leading-6 text-black hover:text-black">Sign In</a>
+        <a href="{{route('login')}}" class="font-semibold leading-6 text-black hover:text-black">Sign In</a>
       </p>
     </div>
   </div>
