@@ -25,8 +25,13 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/change/password', [ProfileController::class, 'changePassword'])->name('change.password');
+    Route::patch('/change/password/store', [ProfileController::class, 'passwordStore'])->name('password.store');
 });

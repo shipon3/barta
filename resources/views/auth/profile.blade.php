@@ -4,8 +4,10 @@
   <!-- Profile Info -->
   <div class="flex gap-4 justify-center flex-col text-center items-center">
     <div>
-      <h1 class="font-bold md:text-2xl">Ahmed Shamim Hasan Shaon</h1>
-      <p class="text-gray-700">Less Talk, More Code 💻</p>
+      <h1 class="font-bold md:text-2xl">{{$profile->f_name}} {{$profile->l_name}}</h1>
+      <h4 class="font-normal md:text-lg">{{$profile->email}}</h4>
+      <span class="font-normal md:text-lg">{{$profile->user_name}}</span>
+      <p class="text-gray-700">{{$profile->bio}}</p>
     </div>
     <!-- / User Meta -->
   </div>
