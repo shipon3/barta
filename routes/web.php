@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,4 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/change/password', [ProfileController::class, 'changePassword'])->name('change.password');
     Route::patch('/change/password/store', [ProfileController::class, 'passwordStore'])->name('password.store');
+
+
+    Route::post('/post/store', [PostController::class, 'store'])->name('post.store');
 });

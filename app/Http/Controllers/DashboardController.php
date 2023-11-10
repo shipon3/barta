@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index(): View
     {
-        return view('dashboard');
+        $posts = DB::table('posts')
+            ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+            ->select('posts.*', 'users.f_name', 'users.l_name', 'users.user_name')
+            ->orderBy('id', 'desc')
+            ->get();
+        return view('dashboard', compact('posts'));
     }
 }
