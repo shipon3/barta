@@ -38,7 +38,7 @@ class ProfileController extends Controller
         DB::table('users')
             ->where('id', $auth->id)
             ->update(['password' => $new_password]);
-        return redirect()->route('profile.index');
+        return redirect()->route('profile.index')->with('message', 'Password has been changed');
     }
 
     public function update(ProfileUpdateRequest $request): RedirectResponse
@@ -54,6 +54,6 @@ class ProfileController extends Controller
                     'bio' => $request->bio
                 ]
             );
-        return redirect()->route('profile.index');
+        return redirect()->route('profile.index')->with('message', 'Profile has been updated');
     }
 }

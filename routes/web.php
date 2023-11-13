@@ -38,4 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::post('/post/store', [PostController::class, 'store'])->name('post.store');
+    Route::get('/post/destroy/{uuid}', [PostController::class, 'destroy'])->name('post.destroy');
+    Route::get('/post/{uuid}/edit', [PostController::class, 'edit'])->name('post.edit');
+    Route::patch('/post/{uuid}/update', [PostController::class, 'update'])->name('post.update');
+    Route::get('/post/{uuid}', [PostController::class, 'show'])->name('post.single');
 });

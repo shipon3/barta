@@ -22,7 +22,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/dashboard')->with('message', 'Welcome To Barta App');
         }
 
         return back()->withErrors([
@@ -45,7 +45,7 @@ class AuthController extends Controller
             'password' => Hash::make($validate_data['password']),
         ];
         DB::table('users')->insert($data);
-        return redirect()->route('login.index');
+        return redirect()->route('login')->with('message', 'Thank you for registration');
     }
 
     public function logout(Request $request): RedirectResponse
@@ -56,6 +56,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('message', 'Thank you for use me');
     }
 }
