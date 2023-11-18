@@ -1,6 +1,6 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('content')
-<form action="{{route('password.store')}}" method="POST">
+<form action="{{route('password.update')}}" method="POST">
     @csrf
     @method('PATCH')
     <div class="space-y-12">

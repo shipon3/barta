@@ -18,14 +18,16 @@
             font-family: 'Inter', sans-serif;
         }
     </style>
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="bg-gray-100">
-    @include('layout.partial.header')
+    @include('layouts.partial.header')
     <main class="container max-w-2xl mx-auto space-y-8 mt-8 px-2 min-h-screen">
         @yield('content')
     </main>
-    @include('layout.partial.footer')
+    @include('layouts.partial.footer')
     <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     @if(Session::has('message'))

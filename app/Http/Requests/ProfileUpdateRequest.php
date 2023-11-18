@@ -27,6 +27,7 @@ class ProfileUpdateRequest extends FormRequest
             'first_name' => 'required|max:100',
             'last_name' => 'nullable',
             'email' => 'required|unique:users,email,' . $auth->id,
+            'user_name' => 'required|unique:users,user_name,' . $auth->id,
             'bio' => 'nullable',
         ];
     }

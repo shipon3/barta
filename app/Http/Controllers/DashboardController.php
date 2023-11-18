@@ -15,6 +15,6 @@ class DashboardController extends Controller
             ->select('posts.*', 'users.f_name', 'users.l_name', 'users.user_name')
             ->orderBy('id', 'desc')
             ->get();
-        return view('dashboard', compact('posts'));
+        return view('post.index', compact('posts'));
     }
 }

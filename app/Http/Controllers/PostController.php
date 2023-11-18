@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -48,9 +49,9 @@ class PostController extends Controller
      */
     public function show(string $uu_id)
     {
-
+        // dd($uu_id);
         $post = DB::table('posts')
-            ->where('uuid', $uu_id)
+            ->where('posts.uuid', $uu_id)
             ->leftJoin('users', 'users.id', '=', 'posts.user_id')
             ->select('posts.*', 'users.f_name', 'users.l_name', 'users.user_name')
             ->first();
@@ -61,7 +62,8 @@ class PostController extends Controller
                     'view_count' => $post->view_count + 1,
                 ]
             );
-        return view('post.post', compact('post'));
+        $comments = Comment::with(['author'])->where('post_id', $post->id)->get();
+        return view('post.post', compact(['post', 'comments']));
     }
 
     /**

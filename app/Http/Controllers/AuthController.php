@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -38,6 +39,7 @@ class AuthController extends Controller
     {
         $validate_data = $request->validated();
         $data[] = [
+            'uuid' => Str::uuid()->toString(),
             'f_name' => $validate_data['first_name'],
             'l_name' => $validate_data['last_name'],
             'user_name' => $validate_data['user_name'],
