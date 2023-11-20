@@ -40,9 +40,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/post/{uuid}/edit', [PostController::class, 'edit'])->name('post.edit');
     Route::patch('/post/{uuid}/update', [PostController::class, 'update'])->name('post.update');
     Route::get('/post/{uuid}', [PostController::class, 'show'])->name('post.single');
+    Route::get('/{uuid}/posts', [PostController::class, 'userPost'])->name('user.profile');
 
     // comment route
     Route::post('/comment/store/{post_id}', [CommentController::class, 'store'])->name('comment.store');
+    Route::get('/comment/destroy/{comment_id}', [CommentController::class, 'destroy'])->name('comment.destroy');
 });
 
 require __DIR__ . '/auth.php';

@@ -101,4 +101,17 @@ class PostController extends Controller
         DB::table('posts')->where('uuid', $uu_id)->delete();
         return back()->with('message', 'Post successfully deleted');
     }
+
+    public function userPost(string $uuid)
+    {
+        $user = DB::table('users')
+            ->where('uuid', $uuid)->first();
+        $posts = DB::table('posts')
+            ->where('user_id', $user->id)
+            ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+            ->select('posts.*', 'users.f_name', 'users.l_name', 'users.user_name', 'users.uuid')
+            ->orderBy('id', 'desc')
+            ->get();
+        return view('profile.profile', compact(['user', 'posts']));
+    }
 }

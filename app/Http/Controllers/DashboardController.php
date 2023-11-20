@@ -12,7 +12,7 @@ class DashboardController extends Controller
     {
         $posts = DB::table('posts')
             ->leftJoin('users', 'users.id', '=', 'posts.user_id')
-            ->select('posts.*', 'users.f_name', 'users.l_name', 'users.user_name')
+            ->select('posts.*', 'users.f_name', 'users.l_name', 'users.user_name', 'users.uuid')
             ->orderBy('id', 'desc')
             ->get();
         return view('post.index', compact('posts'));

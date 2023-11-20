@@ -51,7 +51,7 @@ class ProfileController extends Controller
                     'f_name' => $request->first_name,
                     'l_name' => $request->last_name,
                     'email' => $request->email,
-                    'bio' => $request->bio
+                    'bio' => $request->bio,
                 ]
             );
         return redirect()->route('profile.index')->with('message', 'Profile has been updated');

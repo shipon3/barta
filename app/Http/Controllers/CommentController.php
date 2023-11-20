@@ -6,6 +6,7 @@ use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CommentController extends Controller
 {
@@ -29,11 +30,14 @@ class CommentController extends Controller
      */
     public function store(CommentRequest $request, $post_id)
     {
-        $comment = new Comment();
-        $comment->description = $request->comment;
-        $comment->user_id = Auth::user()->id;
-        $comment->post_id = $post_id;
-        $comment->save();
+        $data[] = [
+            'description' => $request->comment,
+            'user_id' => Auth::user()->id,
+            'post_id' => $post_id,
+            "created_at" =>  date('Y-m-d H:i:s'),
+            "updated_at" => date('Y-m-d H:i:s'),
+        ];
+        DB::table('comments')->insert($data);
         return back()->with('message', 'Thank you for your comment');
     }
 
@@ -66,6 +70,7 @@ class CommentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('comments')->where('id', $id)->delete();
+        return back()->with('message', 'Comment successfully deleted');
     }
 }
