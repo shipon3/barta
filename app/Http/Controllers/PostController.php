@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use App\Models\Comment;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -33,14 +35,10 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $auth = Auth::user();
-        $data[] = [
-            'uuid' => Str::uuid()->toString(),
-            'description' => $request->description,
-            'user_id' => $auth->id,
-            "created_at" =>  date('Y-m-d H:i:s'),
-            "updated_at" => date('Y-m-d H:i:s'),
-        ];
-        DB::table('posts')->insert($data);
+        $data = $request->validated();
+        $data['user_id'] = $auth->id;
+        $data['uuid'] = Str::uuid()->toString();
+        Post::create($data);
         return back()->with('message', 'Post successfully created');
     }
 
@@ -50,18 +48,9 @@ class PostController extends Controller
     public function show(string $uu_id)
     {
         // dd($uu_id);
-        $post = DB::table('posts')
-            ->where('posts.uuid', $uu_id)
-            ->leftJoin('users', 'users.id', '=', 'posts.user_id')
-            ->select('posts.*', 'users.f_name', 'users.l_name', 'users.user_name')
-            ->first();
-        DB::table('posts')
-            ->where('uuid', $uu_id)
-            ->update(
-                [
-                    'view_count' => $post->view_count + 1,
-                ]
-            );
+        $post = Post::where('uuid', $uu_id)->first();
+        $post->view_count += 1;
+        $post->save();
         $comments = Comment::with(['author'])->where('post_id', $post->id)->get();
         return view('post.post', compact(['post', 'comments']));
     }
@@ -71,25 +60,21 @@ class PostController extends Controller
      */
     public function edit(string $uu_id)
     {
-        $post = DB::table('posts')
-            ->where('uuid', $uu_id)
-            ->first();
+        $post = Post::where('uuid', $uu_id)->first();
         return view('post.edit', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $uu_id)
+    public function update(PostRequest $request, string $uu_id)
     {
-        DB::table('posts')
-            ->where('uuid', $uu_id)
-            ->update(
-                [
-                    'description' => $request->description,
-                    'image' => $request->image ?? null,
-                ]
-            );
+        $data = $request->validated();
+        if ($request->image) {
+            $data['image'] = $request->image;
+        }
+        $post = Post::where('uuid', $uu_id)->first();
+        $post->update($data);
         return redirect()->route('dashboard.index')->with('message', 'Post successfully updated');
     }
 
@@ -98,20 +83,18 @@ class PostController extends Controller
      */
     public function destroy(string $uu_id)
     {
-        DB::table('posts')->where('uuid', $uu_id)->delete();
-        return back()->with('message', 'Post successfully deleted');
+        try {
+            $post = Post::where('uuid', $uu_id)->first();
+            $post->delete();
+            return back()->with('message', 'Post successfully deleted');
+        } catch (\Exception $e) {
+            return back()->with('message', 'Post can\'t deleted');
+        }
     }
 
     public function userPost(string $uuid)
     {
-        $user = DB::table('users')
-            ->where('uuid', $uuid)->first();
-        $posts = DB::table('posts')
-            ->where('user_id', $user->id)
-            ->leftJoin('users', 'users.id', '=', 'posts.user_id')
-            ->select('posts.*', 'users.f_name', 'users.l_name', 'users.user_name', 'users.uuid')
-            ->orderBy('id', 'desc')
-            ->get();
-        return view('profile.profile', compact(['user', 'posts']));
+        $user = User::with(['posts'])->where('uuid', $uuid)->first();
+        return view('profile.profile', compact(['user']));
     }
 }

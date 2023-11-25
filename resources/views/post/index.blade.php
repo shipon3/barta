@@ -37,15 +37,14 @@
         <header>
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
-
                     <!-- User Info -->
                     <div class="text-gray-900 flex flex-col min-w-0 flex-1">
-                        <a href="{{route('user.profile',$post->uuid)}}" class="hover:underline font-semibold line-clamp-1">
-                            {{$post->f_name}} {{$post->l_name}}
+                        <a href="{{route('user.profile',$post->user->uuid)}}" class="hover:underline font-semibold line-clamp-1">
+                            {{$post->user->f_name}} {{$post->user->l_name}}
                         </a>
 
-                        <a href="{{route('user.profile',$post->uuid)}}" class="hover:underline text-sm text-gray-500 line-clamp-1">
-                            {{$post->user_name}}
+                        <a href="{{route('user.profile',$post->user->uuid)}}" class="hover:underline text-sm text-gray-500 line-clamp-1">
+                            {{$post->user->user_name}}
                         </a>
                     </div>
                     <!-- /User Info -->

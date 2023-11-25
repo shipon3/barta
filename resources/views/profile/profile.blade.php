@@ -16,7 +16,7 @@
     <div class="flex flex-row gap-16 justify-center text-center items-center">
         <!-- Total Posts Count -->
         <div class="flex flex-col justify-center items-center">
-            <h4 class="sm:text-xl font-bold">{{count($posts)}}</h4>
+            <h4 class="sm:text-xl font-bold">{{count($user->posts)}}</h4>
             <p class="text-gray-600">Posts</p>
         </div>
 
@@ -80,7 +80,7 @@
 <!-- Barta Card -->
 <section id="newsfeed" class="space-y-6">
     <!-- Barta Card -->
-    @foreach($posts as $post)
+    @foreach($user->posts as $post)
     <article class="bg-white border-2 border-black rounded-lg shadow mx-auto max-w-none px-4 py-5 sm:px-6">
         <!-- Barta Card Top -->
         <header>
@@ -90,11 +90,11 @@
                     <!-- User Info -->
                     <div class="text-gray-900 flex flex-col min-w-0 flex-1">
                         <a href="{{route('user.profile',$post->uuid)}}" class="hover:underline font-semibold line-clamp-1">
-                            {{$post->f_name}} {{$post->l_name}}
+                            {{$user->f_name}} {{$user->l_name}}
                         </a>
 
-                        <a href="{{route('user.profile',$post->uuid)}}" class="hover:underline text-sm text-gray-500 line-clamp-1">
-                            {{$post->user_name}}
+                        <a href="{{route('user.profile',$user->uuid)}}" class="hover:underline text-sm text-gray-500 line-clamp-1">
+                            {{$user->user_name}}
                         </a>
                     </div>
                     <!-- /User Info -->
