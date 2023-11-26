@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function () {
 
     // comment route
     Route::post('/comment/store/{post_id}', [CommentController::class, 'store'])->name('comment.store');
+    Route::get('/comment/edit/{post_id}/{id}', [CommentController::class, 'edit'])->name('comment.edit');
+    Route::post('/comment/update/{id}', [CommentController::class, 'update'])->name('comment.update');
     Route::get('/comment/destroy/{comment_id}', [CommentController::class, 'destroy'])->name('comment.destroy');
 });
 
