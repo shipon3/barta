@@ -89,7 +89,7 @@
 
                     <!-- User Info -->
                     <div class="text-gray-900 flex flex-col min-w-0 flex-1">
-                        <a href="{{route('user.profile',$post->uuid)}}" class="hover:underline font-semibold line-clamp-1">
+                        <a href="{{route('user.profile',$user->uuid)}}" class="hover:underline font-semibold line-clamp-1">
                             {{$user->f_name}} {{$user->l_name}}
                         </a>
 

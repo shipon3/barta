@@ -52,4 +52,14 @@ class ProfileController extends Controller
         $user->save();
         return redirect()->route('profile.index')->with('message', 'Profile has been updated');
     }
+
+    public function search(Request $request)
+    {
+        $user = User::where('f_name', 'like', "%$request->key_word%")
+            ->orWhere('l_name', 'like', "%$request->key_word%")
+            ->orWhere('user_name', 'like', "%$request->key_word%")
+            ->orWhere('email', 'like', "%$request->key_word%")
+            ->first();
+        return view('profile.profile', compact(['user']));
+    }
 }

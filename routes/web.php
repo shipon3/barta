@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/change/password', [ProfileController::class, 'changePassword'])->name('change.password');
     Route::patch('/change/password/store', [ProfileController::class, 'passwordStore'])->name('password.update');
-
+    Route::post('/search', [ProfileController::class, 'search'])->name('search.index');
     // post route
     Route::post('/post/store', [PostController::class, 'store'])->name('post.store');
     Route::get('/post/destroy/{uuid}', [PostController::class, 'destroy'])->name('post.destroy');
@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/post/{uuid}/update', [PostController::class, 'update'])->name('post.update');
     Route::get('/post/{uuid}', [PostController::class, 'show'])->name('post.single');
     Route::get('/{uuid}/posts', [PostController::class, 'userPost'])->name('user.profile');
+
 
     // comment route
     Route::post('/comment/store/{post_id}', [CommentController::class, 'store'])->name('comment.store');
